@@ -1,79 +1,51 @@
 #include <stdio.h>
-int menu();
-int divisores(int x);
-int invertir(int x);
-void primo(int k);
-void devolver();
-int main() {
-	int opc,x;
-	printf("Ingresar un numero natural X: ");
-	scanf("%d",&x);
-	do{
-	opc=menu();
-	switch(opc){
-		case 1:printf("La cantidad de divisores naturales de X es:%d ",divisores(x));
-			break;
-		case 2:primo(x);
-			break;
-		case 3:devolver();
-			break;
-		case 4:printf("El numero invertido es :%d",(int)invertir( x));
-			break;
-		case 0:
-			break;
-		default:
-			printf("Opcion invalida");
-	}}while(opc!=0);
+void ingresar(int*,int*);
+void salida(int x,int y,int z,int t);
+void reducar(int,int,float*,float*);
+int main(){
+	float nur,der;
+	int n,nu,i=1,de,b=0,may=0,men=1000,maynu,mayde,mennu,mende;
+	printf("Ingrese un N :");
+	scanf("%d",&n);
+	for(i=1;i<=n;i++){
+		ingresar(&nu,&de);
+		reducar(nu,de,&nur,&der);
+		if(nur/der>may ){
+			may=nur/der;
+			maynu=nur;
+			mayde=der;}
+			if(b==0){
+		    men=nur/der;
+			mennu=nur;
+			mende=der;
+			b=1;}
+		else if(nur/der<men){
+			men=nur/der;
+			mennu=nur;
+			mende=der;}
+	}
+	salida(maynu,mayde,mennu,mende);
 	
 	return 0;
 }
-int menu(){
-	int c;
-	printf("\nIngresar 1 si quiere calcular la cantidad de divisores naturales de X ");
-	printf("\nIngresar 2 si quiere determinar el número natural X es primo");
-	printf("\nIngresar 3 si quiere Comparar dos números reales A y B,devolviendo 1 si A>B,0 si A=B o -1 si A<B ");
-	printf("\nIngresar 4 si quiere invertir X");
-	printf("\nIngresar un 0 si quiere salir del programa:\n");
-	scanf("%d",&c);
-	return c;
+void ingresar(int*x,int*y){
+	printf("\nIngresar el numerador: ");
+	scanf("%d",x);
+	printf("Ingresar el denominador: ");
+	scanf("%d",y);
+	printf("El numero es %d/%d ",*x,*y);
 }
 	
-int divisores(int x){
-	int cont=0,i;
-	for(i=1;i>=x;i++){
-		if(x%i==0)
-			cont++;
+void reducar(int x,int y,float *ar,float *br){
+	int i=1;
+	while(i<=x){
+		if(x%i==0 && y%i==0){
+			*ar=x/i;
+			*br=y/i;
+			}
+		i++;	
+		}		
 	}
-	return cont;
-}
-void primo(int k){
-	int pd=2;
-	while(pd<=k/2 && k%pd != 0){
-		pd=pd+1;}
-	if(pd>(k/2) && (k != 1))
-		printf("Es primo");
-	else
-		printf("No es primo");
-	}
-void devolver(){
-	int a,b;
-	printf("\nIngresar A: ");
-	scanf("%d",&a);
-	printf("\nIngresar B: ");
-	scanf("%d",&b);
-	if(a>b){
-		printf("1");
-	}else if(a==b){
-		printf("0");
-		}else 
-			printf("-1");
-}
-int invertir(int x){
-	int sum=0,dig;
-	while(x!=0){
-		dig=x%10;
-		sum=sum*10+dig;
-		x=x/10;
-	}
-	return sum;
+void salida(int x,int y,int z,int t){
+	printf("\nLa mayor fraccion  es %d/%d y la menor fraccion es %d/%d",x,y,z,t);
 }
